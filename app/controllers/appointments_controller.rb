@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :update, :destroy]
 
   def index
-    @appointments = current_user.appointments.page(params[:page]).per(2)
+    @appointments = current_user.appointments.page(params[:page]).per(10)
   end
 
   def new
