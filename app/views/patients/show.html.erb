@@ -1,0 +1,34 @@
+<!-- app/views/patients/show.html.erb -->
+<h1>Patient Details</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>First Name</th>
+    <td><%= @patient.first_name %></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td><%= @patient.last_name %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @patient.email %></td>
+  </tr>
+  <tr>
+    <th>Appointments</th>
+    <td>
+      <% if @appointments.any? %>
+        <% @appointments.each do |appointment| %>
+          <%= l(appointment.appointment_date, format: :long) %><br>
+        <% end %>
+      <% else %>
+        N/A
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<div class="actions">
+  <%= link_to "Edit", edit_patient_path(@patient), class: "btn btn-primary" %>
+  <%= link_to "Back to Patients", patients_path, class: "btn btn-secondary" %>
+</div>

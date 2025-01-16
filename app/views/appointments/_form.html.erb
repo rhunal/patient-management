@@ -1,0 +1,26 @@
+<%= form_with(model: appointment, local: true) do |form| %>
+  <%= render 'shared/form_errors', object: appointment %>
+
+  <div class="form row">
+    <div class="form-group col-sm-4">
+      <%= form.label :appointment_date, 'Appointment Date' %>
+      <%= form.date_field :appointment_date, class: 'form-control' %>
+      <%= form.time_field :appointment_time, class: 'form-control' %>
+    </div>
+
+    <div class="form-group col-sm-4">
+       <% if @patient %>
+        <%= form.label :patient_id, 'Patient' %>
+        <%= form.hidden_field :patient_id, value: @patient.id %>
+        <%= form.text_field :patient_name, value: @patient.name, class: 'form-control', disabled: true %>
+      <% else %>
+        <%= form.label :patient_id, 'Select Patient' %>
+        <%= form.collection_select(:patient_id, Patient.all, :id, :name, { prompt: 'Choose a patient' }) %>
+      <% end %>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <%= form.submit 'Save Appointment', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
