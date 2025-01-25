@@ -8,7 +8,14 @@ The goal of this project is to build an interface for a provider to be able to l
 ## Features
 
 - **Patients Index Page**: View all patients in the system.
-- **Soon Patients**: View patients with appointments within the next 72 hours.
+- **Soon Patients**: View "soon" patients with upcoming appointments based on a user-specific threshold (e.g., 3 days, 5 days, etc.).
+    - Each user can define their own concept of "soon" by setting the number of upcoming days they consider relevant.
+        For example:
+        User A might define "soon" as 3 days.
+        User B might define "soon" as 5 days.
+        The "soon" filter dynamically adjusts based on the current user's preference.
+    - TODO: add user profile page for updating this info.
+
 - **Search Bar**: Filter results based on name or email.
 - **Patient Creation Page**: Create a new patient.
 - **Edit Patient Information**: Edit existing patient details.
