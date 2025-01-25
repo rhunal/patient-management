@@ -5,7 +5,7 @@ class PatientsController < ApplicationController
 
   def index
     # Filter by "soon" patients with upcoming appointments
-    @patients = params[:soon] ? Patient.soon : Patient.all
+    @patients = params[:soon] ? Patient.soon(current_user.upcoming_business_days) : Patient.all
 
     # Search by name or email (case-insensitive)
     @patients = @patients.search(params[:search]) if params[:search].present?

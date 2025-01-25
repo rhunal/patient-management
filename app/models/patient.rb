@@ -4,7 +4,7 @@ class Patient < ApplicationRecord
   attribute :next_appointment
   has_many :appointments, dependent: :destroy
 
-  scope :soon, -> { joins(:appointments).where('appointments.appointment_date <= ?', 72.hours.from_now).distinct }
+  scope :soon, -> (soon_threshold) { joins(:appointments).where('appointments.appointment_date BETWEEN ? AND ?', Date.today, soon_threshold).distinct }
   scope :search, ->(term) { where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR lower(email) LIKE ?', "%#{term.downcase}%", "%#{term.downcase}%", "%#{term.downcase}%") }
 
   validates :first_name, :last_name, :email, presence: true
@@ -16,7 +16,7 @@ class Patient < ApplicationRecord
   end
 
   def soon_appointment
-    appointments.order(:appointment_date).first
+    appointments.order(:appointment_date).last
   end
 
   def name
